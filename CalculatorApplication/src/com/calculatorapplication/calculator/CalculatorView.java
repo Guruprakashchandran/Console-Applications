@@ -1,5 +1,6 @@
 package com.calculatorapplication.calculator;
 
+import java.lang.module.ModuleDescriptor.Exports;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,7 +28,7 @@ public class CalculatorView implements CalculatorControllerToViewCall {
 		boolean isIterate = true;
 		while (isIterate) {
 			
-			System.out.println("\n1) show History\n2) Calculation\n3) Exit");
+			System.out.println("\n1) show History\n2) Expression\n3) Calculation\n4) Exit");
 			System.out.print("\nEnter Input : ");
 			int input = scan.nextInt();
 			switch (input) {
@@ -36,9 +37,12 @@ public class CalculatorView implements CalculatorControllerToViewCall {
 				calculatorViewToControllerCall.getDetails();
 				break;
 			case 2:
-				getExpression();
+				getFullExpression();
 				break;
 			case 3:
+				getExpression();
+				break;
+			case 4:
 				System.out.println("Exitted!!!");
 				isIterate = false;
 				break;
@@ -48,12 +52,38 @@ public class CalculatorView implements CalculatorControllerToViewCall {
 		}
 	}
 
+	private void getFullExpression() {
+		
+		System.out.print("Enter Expression : ");
+		String exp = scan.next();
+		solutionForExpression(exp);
+	}
+
 	private void getExpression() {
 
 		List<String> list = new LinkedList<>();
 		getInput(list);
 	}
-
+	private void solutionForExpression(String exp) {
+		
+		List<String> list = new LinkedList<>();
+		String s = "";
+		for(int i = 0;i<exp.length();++i) {
+			
+			if(i + 1 == exp.length() || exp.charAt(i) == '+' || exp.charAt(i) == '-' || exp.charAt(i) == '*' || exp.charAt(i) == '/') {
+				
+				list.add(s);
+				list.add(Character.toString(exp.charAt(i)));
+				s = "";
+			}
+			else {
+				
+				s += exp.charAt(i);
+			}
+			
+		}
+		solution(list,exp);
+	}
 	private void getInput(List<String> list) {
 
 		try {
@@ -90,7 +120,7 @@ public class CalculatorView implements CalculatorControllerToViewCall {
 //		finally {}
 	}
 
-	private void solution(List<String> list, String exp) {
+	private void solution(List<String> list,String exp) {
 
 		for (int i = 0; i < list.size(); ++i) {
 
