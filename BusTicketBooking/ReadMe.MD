@@ -26,5 +26,4 @@
             --YOU GAVE PASSENGER ID TO DELETE YOUR TICKET DETAILS.
        5) VIEW BOOKING DETAILS
             --YOU CAN VIEW ALL YOUR BOOKING DETAILS.
-
-    YOUTUBE VIDEO LINK - https://youtu.be/asju5kqB3W8
+  YOUTUBE VIDEO LINK - https://youtu.be/asju5kqB3W8
