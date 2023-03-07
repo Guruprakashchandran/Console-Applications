@@ -19,7 +19,7 @@ public class AdminPageView implements LoginPageViewToAdminPageView,AdminPageCont
 	public void adminMainPage() {
 
 		System.out.println("\n**************ADMIN PAGE**************");
-		System.out.println("\n1) Show User Details\n2) Remove User\n3) Back\n4) Exit");
+		System.out.println("\n1) Show User Details\n2) Remove User\n3) Back\n4) logout");
 		System.out.print("\nEnter Input : ");
 		int input = scan.nextInt();
 		switch(input) {
@@ -34,7 +34,8 @@ public class AdminPageView implements LoginPageViewToAdminPageView,AdminPageCont
 				new LoginOrRegisterPageView().mainPage();
 				break;
 			case 4:
-				System.out.println("Exitted!!!");
+				System.out.println("logout!!!");
+				new LoginOrRegisterPageView().mainPage();
 				break;
 			default:
 				System.out.println("\nWrong Input");

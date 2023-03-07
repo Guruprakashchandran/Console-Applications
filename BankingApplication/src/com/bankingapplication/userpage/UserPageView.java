@@ -22,7 +22,7 @@ public class UserPageView implements LoginOrRegisterPageViewToUserPageView, User
 		System.out.println("\n*************USER MAIN PAGE*************");
 		userPageViewToControllerCall.transactions(userId);
 		System.out.println(
-				"\n1) Deposit Money\n2) Withdraw Money\n3) Money Transfer\n4) Check Account Balance\n5) Edit Personal Details\n6) Back\n7) Exit");
+				"\n1) Deposit Money\n2) Withdraw Money\n3) Money Transfer\n4) Check Account Balance\n5) Edit Personal Details\n6) Back\n7) logout");
 		System.out.print("\nEnter the Input : ");
 		int input = scan.nextInt();
 		switch (input) {
@@ -47,7 +47,11 @@ public class UserPageView implements LoginOrRegisterPageViewToUserPageView, User
 			break;
 		case 7:
 
-			System.out.println("\nExitted!!!");
+			System.out.println("\nlogout!!!");
+			new LoginOrRegisterPageView().mainPage();
+			break;
+		default : 
+			System.out.println("\nwrong input!!!");
 		}
 	}
 
@@ -91,6 +95,7 @@ public class UserPageView implements LoginOrRegisterPageViewToUserPageView, User
 		if (pass.length() > 7 && pass.equals(conPass)) {
 
 			userPageViewToControllerCall.changePass(pass, userId);
+			System.out.println("changed successfully!!!");
 		} else {
 
 			System.out.println("\nPlease!!!Enter Password Length above 8");
@@ -105,6 +110,7 @@ public class UserPageView implements LoginOrRegisterPageViewToUserPageView, User
 		if (pin > 999 && pin < 10000) {
 
 			userPageViewToControllerCall.changePin(pin, userId);
+			System.out.println("changed successfully!!!");
 		} else {
 
 			System.out.println("Wrong Pin!!!");
@@ -119,6 +125,7 @@ public class UserPageView implements LoginOrRegisterPageViewToUserPageView, User
 		if (dateOfBirth.length() == 10) {
 
 			userPageViewToControllerCall.changeDateOfBirth(dateOfBirth, userId);
+			System.out.println("changed successfully!!!");
 		} else {
 
 			System.out.println("Wrong Date Of Birth!!!");
@@ -133,6 +140,7 @@ public class UserPageView implements LoginOrRegisterPageViewToUserPageView, User
 		if (mobileNo.length() == 10) {
 
 			userPageViewToControllerCall.changeMobNumber(mobileNo, userId);
+			System.out.println("changed successfully!!!");
 		} else {
 
 			System.out.println("Wrong Mobile Number !!!");
