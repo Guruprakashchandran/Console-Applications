@@ -1,12 +1,12 @@
 
   # CHAT APPLICATION WITH DATABASE CONNECTION
-    ## USER 
+  ## USER 
         
         1)  USER MUST REGISTER TO USE THIS APPLICATION.
         2)  I VALIDATE USER DETAILS.
         3)  LOGIN TO VIEW MAIN PAGE.
         
-    ## PRIVATE CHAT 
+  ## PRIVATE CHAT 
       
         ### FEATURES
               
@@ -18,7 +18,7 @@
               4) SEND MESSAGE
                     IF YOU SEND ANY MESSAGES ALL MESSAGES REFRESH TO SHOW ALL AND THIS MESSAGE ALSO SHOW.
                     
-     ## GROUP CHAT
+  ## GROUP CHAT
       
           ### FEATURES
               
@@ -39,5 +39,4 @@
                         IF YOU WANT TO EXIT GROUP YOU CLICK EXIT GROUP OPTION TO EXIT GROUP.
              2) CREATE GROUP
                    YOU CAN CREATE NEW GROUP AND SHOW YOUR LIST OF FRIENDS TO SELECT THE FRIENDS TO ADDED IN GROUP.
-
-      YOUTUBE VIDEO LINK -  https://youtu.be/8SmEqvbUF7k
+ YOUTUBE VIDEO LINK -  https://youtu.be/8SmEqvbUF7k
