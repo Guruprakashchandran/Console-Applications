@@ -8,7 +8,7 @@ import com.chatapplication.userdetails.User;
 
 public interface GroupChatControllerToViewCall {
 
-	void showDetails(List<List<Map<String, List<Messages>>>> data, User user, List<String> groupNames, int[] friendsCount, List<Integer> groupMembersCount);
+	void showDetails(List<List<Map<String, List<Messages>>>> data, User user, List<String> groupNames, int[] friendsCount, List<List<Integer>> groupMembersCount);
 
 	void noFreinds();
 

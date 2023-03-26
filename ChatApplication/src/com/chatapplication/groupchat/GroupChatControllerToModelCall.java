@@ -1,6 +1,7 @@
 package com.chatapplication.groupchat;
 
 import java.util.List;
+import java.util.Map;
 
 import com.chatapplication.userdetails.User;
 
@@ -8,7 +9,7 @@ public interface GroupChatControllerToModelCall {
 
 	void getGroupChatDetails(User user);
 
-	void getFriendsList(User user);
+	Map<String, String> getFriendsList(User user);
 
 	void createGroup(List<String> mobileNoList, String grpName, User user);
 

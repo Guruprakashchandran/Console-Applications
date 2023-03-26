@@ -206,11 +206,21 @@ public class LoginOrRegisterPageView implements LoginOrRegisterPageControllerToV
 		if (password.equals("2")) {
 			return "2";
 		}
-		System.out.print("\nEnter Confirm Password : ");
-		String conPassword = scan.next();
-		if (!ChatUtil.checkPassword(password, conPassword)) {
-
-			System.out.println("Invalid Password!!!");
+		if(ChatUtil.checkPasswordLength(password)) {
+			
+			System.out.print("\nEnter Confirm Password : ");
+			String conPassword = scan.next();
+			if (!ChatUtil.checkPassword(password, conPassword)) {
+				
+				System.out.println("Invalid Confirm Password!!!");
+				password = getPassword();
+			}
+//			return password;
+			
+		}
+		else {
+			
+			System.out.println("Invalid Password Length!!!");
 			password = getPassword();
 		}
 		return password;

@@ -171,4 +171,97 @@ public class UserDetailsRepository {
 		}
 		return userDetails;
 	}
+
+	public void changeAbout(User user, String newAbout) {
+
+		try {
+
+			prepareStatement = connection.prepareStatement("update register set about = ? where mobileno = ?");
+			prepareStatement.setString(1, newAbout);
+			prepareStatement.setString(2, user.getMobileNo());
+			prepareStatement.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+
+			try {
+
+				prepareStatement.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public void changePassword(User user, String newPassword) {
+
+		try {
+
+			prepareStatement = connection.prepareStatement("update register set password = ? where mobileno = ?");
+			prepareStatement.setString(1, newPassword);
+			prepareStatement.setString(2, user.getMobileNo());
+			prepareStatement.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+
+			try {
+
+				prepareStatement.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void changeName(User user, String newName) {
+
+		try {
+
+			prepareStatement = connection.prepareStatement("update register set name = ? where mobileno = ?");
+			prepareStatement.setString(1, newName);
+			prepareStatement.setString(2, user.getMobileNo());
+			prepareStatement.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+
+			try {
+
+				prepareStatement.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void changeDob(User user, String dob) {
+
+		try {
+
+			prepareStatement = connection.prepareStatement("update register set dateofbirth = ? where mobileno = ?");
+			prepareStatement.setString(1, dob);
+			prepareStatement.setString(2, user.getMobileNo());
+			prepareStatement.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+
+			try {
+
+				prepareStatement.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
 }

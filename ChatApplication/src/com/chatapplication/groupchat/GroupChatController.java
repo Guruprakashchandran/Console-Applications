@@ -21,7 +21,7 @@ public class GroupChatController implements GroupChatViewToControllerCall,GroupC
 		groupChatControllerToModelCall.getGroupChatDetails(user);
 	}
 	@Override
-	public void showDetails(List<List<Map<String, List<Messages>>>> data,User user,List<String> groupNames,int[] friendsCount,List<Integer> groupMembersCount) {
+	public void showDetails(List<List<Map<String, List<Messages>>>> data,User user,List<String> groupNames,int[] friendsCount,List<List<Integer>> groupMembersCount) {
 		
 		groupChatControllerToViewCall.showDetails(data,user,groupNames,friendsCount,groupMembersCount);
 	}
@@ -36,9 +36,10 @@ public class GroupChatController implements GroupChatViewToControllerCall,GroupC
 		groupChatControllerToModelCall.addMessage(user,id,msg,groupId,status);
 	}
 	@Override
-	public void getFriendsList(User user) {
+	public Map<String,String> getFriendsList(User user) {
 		
-		groupChatControllerToModelCall.getFriendsList(user);
+		Map<String,String> friendList = groupChatControllerToModelCall.getFriendsList(user);
+		return friendList;
 	}
 	@Override
 	public void friendsList(Map<String,String> friendsList) {

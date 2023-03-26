@@ -1,5 +1,6 @@
 package com.chatapplication.util;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -18,7 +19,11 @@ public class ChatUtil {
 		}
 		return true;
 	}
-
+//	public static void main(String[] args) {
+//		
+//		System.out.println("hiii");
+//		checkAge("12/02/2000");
+//	}
 	public static boolean checkMobileNumber(String mobileNo) {
 		
 		Pattern p = Pattern.compile("^\\d{10}$");
@@ -80,13 +85,23 @@ public class ChatUtil {
 		}
 	}
 
+	public static boolean checkPasswordLength(String password) {
+		
+//		if(password.length() < 8) {
+//			
+//			return false;
+//		}
+//		return true;
+		return password.length() < 8 ? false: true;
+	}
 	public static boolean checkPassword(String password, String conPassword) {
 		
-		if(password.length() < 8 || !password.equals(conPassword)) {
-			
-			return false;
-		}
-		return true;
+//		if(password.length() < 8 || !password.equals(conPassword)) {
+//			
+//			return false;
+//		}
+//		return true;
+		return password.equals(conPassword) ? true : false;
 	}
 
 	public static boolean checkDate(String date) {

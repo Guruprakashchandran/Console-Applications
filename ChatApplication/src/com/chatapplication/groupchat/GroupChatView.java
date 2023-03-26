@@ -3,6 +3,8 @@ package com.chatapplication.groupchat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,7 +31,7 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 
 	@Override
 	public void showDetails(List<List<Map<String, List<Messages>>>> data, User user, List<String> groupNames,
-			int[] friendsCount, List<Integer> groupMembersCount) {
+			int[] friendsCount, List<List<Integer>> groupMembersCount) {
 
 		int k = 0, i = 0;
 		System.out.println();
@@ -71,32 +73,70 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 		System.out.print("Enter Group Name : ");
 		String grpName = scan.nextLine();
 		System.out.println("\nGroup Created!!!");
-		groupChatViewToControllerCall.getFriendsList(user);
+		Map<String,String> friendList = groupChatViewToControllerCall.getFriendsList(user);
+		int i = 0;
+		for (Map.Entry<String, String> entry : friendList.entrySet()) {
+
+			System.out.println(i + 1 + ") " + entry.getValue());
+			i++;
+		}
 		List<String> mobileNoList = new LinkedList<>();
-		System.out.println("\nIf You want Exit Press \" ` \"");
+		List<Integer> mobileNo = new ArrayList<>();
+		System.out.println("\nIf You want Exit Press \" 0 \"");
 		while (true) {
 
-			System.out.print("Enter Friend Mobile No : ");
-			String no = scan.next();
-			if (!no.equals("`")) {
+			System.out.print("Enter Friend Serial No : ");
+			int no = scan.nextInt();
+			if (!(no == 0)) {
 
-				if (ChatUtil.checkMobileNumber(no)) {
-
-					mobileNoList.add(no);
-				} else {
-
-					System.out.println("Sorry!!Wrong Input!!!");
+//				if (ChatUtil.checkMobileNumber(no)) {
+				if(mobileNo.contains(no)) {
+					
+					System.out.println("Already You Select the Number!!!");
 				}
+				else if(i >= (no-1)) {
+					
+					mobileNo.add(no);
+			
+					if(i-- == 0) {
+						
+						System.out.println("You Select All Friends!!");
+						break;
+					}
+				}
+				else {
+					
+					System.out.println("Wrong Serial Number!!!");
+				}
+//				} else {
+//
+//					System.out.println("Sorry!!Wrong Input!!!");
+//				}
 			} else {
 
 				break;
 			}
 		}
+		int j = 0;
+		i = 0;
+		Collections.sort(mobileNo);
+		for(Map.Entry<String, String> entry : friendList.entrySet()) {
+			
+			if(mobileNo.size()>j) {
+				
+				if(mobileNo.get(j)-1 == i) {
+					
+					mobileNoList.add(entry.getKey());
+				}
+			}
+			i++;
+		}
+		
 		groupChatViewToControllerCall.createGroup(mobileNoList, grpName, user);
 	}
 
 	private void showGroupChats(List<List<Map<String, List<Messages>>>> data, User user, int k, int input, int i,
-			List<String> groupNames, int[] friendsCount, List<Integer> groupMembersCount) {
+			List<String> groupNames, int[] friendsCount, List<List<Integer>> groupMembersCount) {
 
 		List<Messages> list1 = new LinkedList<>();
 		List<Messages> list2 = new LinkedList<>();
@@ -104,7 +144,7 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 		int set = 0;
 		String id = "";
 		for (Entry<String, List<Messages>> entry : data.get(input - 1).get(input - 1).entrySet()) {
-//			System.out.println(groupNames.get(input-1));
+
 			if (set == 0) {
 
 				list1 = entry.getValue();
@@ -128,7 +168,7 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 
 	private void showMessages(List<List<Map<String, List<Messages>>>> data, List<Messages> list1, List<Messages> list2,
 			User user, int k, int input, int i, String groupId, String id, List<String> groupNames, int[] friendsCount,
-			List<Integer> groupMembersCount) {
+			List<List<Integer>> groupMembersCount) {
 
 		boolean isNewMessage = false;
 		int person1msg = 0, person2msg = 0;
@@ -185,11 +225,11 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 
 	private void getChoice(List<List<Map<String, List<Messages>>>> data, List<Messages> list1, List<Messages> list2,
 			User user, int k, int input, int i, String groupId, String id, List<String> groupNames, int[] friendsCount,
-			List<Integer> groupMembersCount) {
+			List<List<Integer>> groupMembersCount) {
 
 		try {
 
-			if (0 < groupMembersCount.get(input - 1)) {
+			if (0 < groupMembersCount.get(input - 1).get(0)) {
 
 				System.out.println("\n1) Send Message");
 				System.out.println("2) Add Friend");
@@ -211,7 +251,6 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 					groupChatViewToControllerCall.exitGroup(groupId, user);
 					break;
 				case 4:
-
 					break;
 				default:
 					System.out.println("\nWrong Input!!!");
@@ -234,7 +273,6 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 					groupChatViewToControllerCall.exitGroup(groupId, user);
 					break;
 				case 3:
-
 					break;
 				default:
 					System.out.println("\nWrong Input!!!");
@@ -286,7 +324,7 @@ public class GroupChatView implements GroupChatControllerToViewCall {
 
 	private void getMessage(List<List<Map<String, List<Messages>>>> data, List<Messages> list1, List<Messages> list2,
 			User user, int k, int input, int i, String groupId, String id, List<String> groupNames, int[] friendsCount,
-			List<Integer> groupMembersCount) {
+			List<List<Integer>> groupMembersCount) {
 
 		System.out.println("\n----------------Message-----------------\n");
 

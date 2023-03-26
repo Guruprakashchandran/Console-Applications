@@ -32,7 +32,7 @@ public class LoginOrRegisterPageModel implements LoginOrRegisterPageControllerTo
 
 		if (userDetail != null) {
 
-			loginOrRegisterPageModelToControllerCall.loginSuccess(user);
+			loginOrRegisterPageModelToControllerCall.loginSuccess(userDetail);
 		} else {
 
 			loginOrRegisterPageModelToControllerCall.loginFailed();

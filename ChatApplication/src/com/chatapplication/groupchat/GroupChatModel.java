@@ -21,7 +21,7 @@ public class GroupChatModel implements GroupChatControllerToModelCall {
 	public void getGroupChatDetails(User user) {
 
 		List<String> groupNames = new LinkedList<>();
-		List<Integer> groupMembersCount = new LinkedList<>();
+		List<List<Integer>> groupMembersCount = new LinkedList<>();
 		int[] friendsCount = new int[1];
 		List<List<Map<String, List<Messages>>>> data = GroupChatRepository.getInstance().getGroupChatDetails(user,
 				groupNames, friendsCount, groupMembersCount);
@@ -29,16 +29,18 @@ public class GroupChatModel implements GroupChatControllerToModelCall {
 	}
 
 	@Override
-	public void getFriendsList(User user) {
+	public Map<String,String> getFriendsList(User user) {
 
 		Map<String, String> friendsList = GroupChatRepository.getInstance().getFriendsList(user);
-		if (friendsList.size() > 0) {
-
-			groupChatModelToControllerCall.friendsList(friendsList);
-		} else {
+		if (friendsList.size() == 0) {
 
 			groupChatModelToControllerCall.noFriends();
+//			groupChatModelToControllerCall.friendsList(friendsList);
+//		} else {
+//
+//			groupChatModelToControllerCall.noFriends();
 		}
+		return friendsList;
 	}
 
 	@Override

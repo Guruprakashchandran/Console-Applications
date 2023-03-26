@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
+import com.chatapplication.editprofile.ProfileView;
 import com.chatapplication.groupchat.GroupChatView;
 import com.chatapplication.personalchatlist.Message;
 import com.chatapplication.userdetails.User;
@@ -32,7 +33,8 @@ public class PersonalChatView implements PersonalChatControllerToViewCall {
 				System.out.println("\n*****************Welcome Chat App****************");
 				System.out.println("\n1) Private Chat");
 				System.out.println("2) Group Chat");
-				System.out.println("3) Exit");
+				System.out.println("3) Profile Page");
+				System.out.println("4) Exit");
 				System.out.print("\nEnter Input : ");
 				int input = scan.nextInt();
 				switch (input) {
@@ -44,6 +46,9 @@ public class PersonalChatView implements PersonalChatControllerToViewCall {
 					new GroupChatView().getDetails(user);
 					break;
 				case 3:
+					new ProfileView().profilePage(user);
+					break;
+				case 4:
 					System.out.println("\nExitted!!!");
 					personalChatViewToControllerCall.closeConnection();
 					isTrue = false;

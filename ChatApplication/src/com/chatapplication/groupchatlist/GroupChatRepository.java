@@ -54,7 +54,7 @@ public class GroupChatRepository {
 	}
 
 	public List<List<Map<String, List<Messages>>>> getGroupChatDetails(User user, List<String> groupNames,
-			int[] friendsCount, List<Integer> groupMembersCount) {
+			int[] friendsCount, List<List<Integer>> groupMembersCount) {
 
 		try {
 
@@ -108,11 +108,10 @@ public class GroupChatRepository {
 	private List<Map<String, List<Messages>>> getMessageFromOneGroup(ResultSet result3, String personId,
 			List<Messages> list1, List<Messages> list2, Map<String, List<Messages>> persons,
 			List<Map<String, List<Messages>>> data1, String groupId, List<String> groupNames, int[] friendsCount,
-			List<Integer> groupMembersCount, User user) {
+			List<List<Integer>> groupMembersCount, User user) {
 
 		try {
 
-//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/task1", "root", "root");
 			String groupName = "";
 			st2 = connection.createStatement();
 			result2 = st2.executeQuery("select count(*) from personalchat where person1id = '" + personId
@@ -128,18 +127,19 @@ public class GroupChatRepository {
 			st1 = connection.createStatement();
 			result1 = st1.executeQuery("select * from personalchat where person1mobileno = '" + user.getMobileNo()
 					+ "' or person2mobileno = '" + user.getMobileNo() + "'");
-			groupMembersCount.add(0);
+			List<Integer> groupMemberCount = new LinkedList<>();
+			groupMemberCount.add(0);
 			while (result1.next()) {
 
 				if (result1.getString("person1mobileno").equals(user.getMobileNo())) {
 
 					st2 = connection.createStatement();
-					result2 = st2.executeQuery("select count(*) from groupchat where groupid = '" + groupId
+					result2 = st2.executeQuery("select * from groupchat where groupid = '" + groupId
 							+ "' and personmobileno = '" + result1.getString("person2mobileno") + "'");
 					if (!result2.next()) {
 
-						groupMembersCount.set(groupMembersCount.size() - 1,
-								groupMembersCount.get(groupMembersCount.size() - 1) + 1);
+						groupMemberCount.set(0,
+								groupMemberCount.get(0) + 1);
 					}
 				} else {
 
@@ -148,8 +148,8 @@ public class GroupChatRepository {
 							+ "' and personmobileno = '" + result1.getString("person1mobileno") + "'");
 					if (!result2.next()) {
 
-						groupMembersCount.set(groupMembersCount.size() - 1,
-								groupMembersCount.get(groupMembersCount.size() - 1) + 1);
+						groupMemberCount.set(0,
+								groupMemberCount.get(0) + 1);
 					}
 				}
 			}
@@ -182,7 +182,8 @@ public class GroupChatRepository {
 			persons.put(groupId, list2);
 			groupNames.add(groupName);
 			data1.add(persons);
-
+			System.out.println(groupMemberCount);
+			groupMembersCount.add(groupMemberCount);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -262,7 +263,7 @@ public class GroupChatRepository {
 		} finally {
 
 			try {
-//				connection.close();
+				
 				prepareStatement.close();
 			} catch (SQLException e) {
 
@@ -275,7 +276,6 @@ public class GroupChatRepository {
 
 		try {
 
-//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/task1", "root", "root");
 			st = connection.createStatement();
 			String grpId = generateGroupId();
 			addPerson(grpId, groupName, user.getMobileNo());
@@ -328,7 +328,6 @@ public class GroupChatRepository {
 
 		try {
 
-//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/task1", "root", "root");
 			st2 = connection.createStatement();
 			result2 = st2.executeQuery("select * from register where mobileno ='" + mobileNo + "'");
 			if (result2.next()) {
@@ -402,7 +401,6 @@ public class GroupChatRepository {
 
 		try {
 
-//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/task1", "root", "root");
 			st = connection.createStatement();
 			result = st.executeQuery("select * from personalchat where person1mobileno = '" + user.getMobileNo() + "'");
 			Map<String, String> friendList = new LinkedHashMap<>();
@@ -416,6 +414,7 @@ public class GroupChatRepository {
 
 				friendList.put(result.getString("person1mobileNo"), result.getString("person1name"));
 			}
+//			System.out.println(friendList.toString());
 			return friendList;
 		} catch (Exception e) {
 
@@ -496,7 +495,6 @@ public class GroupChatRepository {
 		try {
 
 			List<String> rejectedNumbers = new LinkedList<>();
-//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/task1", "root", "root");
 			for (int i = 0; noList.size() > i; ++i) {
 
 				boolean isFalse = false;
